@@ -1,23 +1,24 @@
 {
   "name": "server",
-  "version": "1.0.0",
-  "description": "On Sight App Node-Express Server",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "author": "Allana Cole",
-  "license": "ISC",
   "dependencies": {
     "bcrypt": "^1.0.3",
+    "body-parser": "~1.16.0",
     "connect-flash": "^0.1.1",
-    "ejs": "^2.5.7",
-    "express": "^4.16.2",
-    "express-ejs-layouts": "^2.3.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "ejs": "~2.5.5",
+    "express": "~4.14.1",
+    "express-ejs-layouts": "~2.2.0",
     "express-session": "^1.15.6",
     "mongoose": "^4.13.9",
-    "nodemon": "^1.14.11",
+    "morgan": "~1.7.0",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "serve-favicon": "~2.3.2"
   }
 }
