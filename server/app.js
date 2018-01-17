@@ -5,16 +5,13 @@ const logger       = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
 const layouts      = require('express-ejs-layouts');
-const mongoose     = require('mongoose');
-const cors         = require('cors');
-const passport     = require('passport');
-const session      = require('express-session');
+const mongoose     = require('mongoose')
+const cors         = require('cors')
+const passport     = require('passport')
+const session      = require('express-session')
 
-require('dotenv').config();
-require('./config/passport-config');
-require('./socket.js');
-
-mongoose.connect(process.env.MONGODB_URI);
+require('dotenv').config()
+mongoose.connect(process.env.MONGODB_URI)
 
 const app = express();
 
@@ -23,44 +20,35 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'On Site App - Express Server';
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(layouts);
 app.use(cors({
-    credentials:true,
-    origin:['http://localhost:4200']
-})
-);
+  credentials: true,
+  origin:[]
+}))
+
 app.use(session({
-    secret: 'dopest app ever',
-    resave: true,
-    saveUninitialized: true
-}));
-app.use(passport.initialize());
-app.use(passport.session());
+  secret: 'dopest app ever',
+  resave: true,
+  saveUninitialized: true
+}))
+app.use(passport.initialize())
+app.use(passport.session())
 
-
-
-
-// ------ Routes Begin ----------------//
+// ROUTES BEGIN -------- //
 const index = require('./routes/index');
 app.use('/', index);
 
-// ------ Routes End ----------------//
+// Routes END ------//
 
-
-
-// // if no Express routes match, sent the browser the Angular app.
-app.use((req, res, next) => {
-    res.sendFile(__dirname + '/public/index.html');
-});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -68,7 +56,6 @@ app.use((req, res, next) => {
   err.status = 404;
   next(err);
 });
-
 
 // error handler
 app.use((err, req, res, next) => {
