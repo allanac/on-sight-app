@@ -47,6 +47,9 @@ app.use(passport.session())
 const index = require('./routes/index');
 app.use('/', index);
 
+const authRoutes = require('./routes/authorize-api-router')
+app.use('/api', authRoutes)
+
 // Routes END ------//
 
 
