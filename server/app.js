@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(layouts);
 app.use(cors({
   credentials: true,
-  origin:[]
+  origin:['http://localhost:4200']
 }))
 
 app.use(session({
@@ -52,6 +52,10 @@ app.use('/api', authRoutes)
 
 // Routes END ------//
 
+// // if no Express routes match, sent the browser the Angular app.
+app.use((req, res, next) => {
+    res.sendFile(__dirname + '/public/index.html');
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

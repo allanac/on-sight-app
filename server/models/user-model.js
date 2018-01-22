@@ -10,7 +10,7 @@ const userSchema = new Schema(
     encryptedPassword: {
       type: String,
       required:[true, 'Password is required']
-    }
+    },
     scans: [
       {
         type: Schema.Types.ObjectId,
@@ -19,7 +19,7 @@ const userSchema = new Schema(
   },
   {
     timestamps:
-    { createdAt: 'created_at', 
+    { createdAt:'created_at',
       updatedAt:'updated_at'}
     }
 )

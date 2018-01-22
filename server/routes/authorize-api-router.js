@@ -1,5 +1,5 @@
 const express = require('express')
-const bcrpyt = require('bcrypt')
+const bcrypt = require('bcrypt')
 const passport = require('passport')
 
 const UserModel = require('../models/user-model')
@@ -26,8 +26,9 @@ router.post('/signup', (req, res, next) => {
         res.status(400).json({errorMessage:'Sorry! That username is taken'})
         return
       }
+
       const salt = bcrypt.genSaltSync(10)
-      const hashPassword = bcrpyt.hashSync(req.body.signupPassword, salt)
+      const hashPassword = bcrypt.hashSync(req.body.signupPassword, salt)
 
       const theUser = new UserModel({
         username: req.body.signupUsername,
