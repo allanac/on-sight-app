@@ -14,11 +14,13 @@ import {AuthorizeApiService} from './services/authorize-api.service'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
+import { NavComponent } from './nav/nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    NavComponent
   ],
   imports: [
     AppRoutingModule,
