@@ -1,3 +1,14 @@
-<p>
-  nav works!
-</p>
+<nav>
+    <div class="nav-wrapper">
+
+      <a routerLink="/onsight" class="brand-logo center">On Sight App</a>
+
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+
+        <li><a routerLink="/signup">SignUp</a></li>
+        <li><a routerLink="/login">Login</a></li>
+        <li><a (click)="logMeOut()"> Log Out </a></li>
+        <li><a routerLink="/mymedia">My Scans</a></li>
+      </ul>
+    </div>
+  </nav>

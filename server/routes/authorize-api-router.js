@@ -19,30 +19,31 @@ router.post('/signup', (req, res, next) => {
     {username: req.body.signupUsername},
     (err, userFromDb) => {
       if(err){
-        res.status(500).json({errorMessage:'Error finding username'})
-        return
+        res.status(500).json({errorMessage:'Error finding username'});
+        return;
       }
       if(userFromDb){
         res.status(400).json({errorMessage:'Sorry! That username is taken'})
-        return
+        return;
       }
 
-      const salt = bcrypt.genSaltSync(10)
-      const hashPassword = bcrypt.hashSync(req.body.signupPassword, salt)
+      const salt = bcrypt.genSaltSync(10);
+      const hashPass = bcrypt.hashSync(req.body.signupPassword, salt);
 
       const theUser = new UserModel({
         username: req.body.signupUsername,
-        encryptedPassword: hashPassword
+        encryptedPassword: hashPass
       })
 
       theUser.save((err) => {
         if(err){
           res.status(500).json({errorMessage: 'Error saving user'})
-          return
+          return;
         }
         // log user in after sign up
         req.login(theUser, (err) => {
           if(err){
+            console.log('User auto login error', err)
             res.status(500).json({ errorMessage: 'Error logging user in'})
             return
           }
@@ -65,12 +66,12 @@ router.post('/login', (req,res,next) => {
       }
       if(!theUser){
         res.status(401).json({errorMessage: extraInfo.message})
-        return
+        return;
       }
       req.login(theUser, (err) => {
         if(err){
           res.status(500).json({errorMessage:'Login failed'})
-          return
+          return;
         }
         theUser.encrpytedPassword = undefined
         res.status(200).json(theUser)

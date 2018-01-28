@@ -11,6 +11,8 @@ const passport     = require('passport')
 const session      = require('express-session')
 
 require('dotenv').config()
+require('./config/passport-config')
+
 mongoose.connect(process.env.MONGODB_URI)
 
 const app = express();
@@ -26,7 +28,7 @@ app.locals.title = 'On Site App - Express Server';
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(layouts);
@@ -40,6 +42,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }))
+
 app.use(passport.initialize())
 app.use(passport.session())
 
