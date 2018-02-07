@@ -54,4 +54,20 @@ passport.use(
   ) // local strategy
 )
 
-// IG user login 
+// IG user login
+const IgStrategy = require('passport-instgram').Strategy;
+
+passport.use(
+  new IgStrategy(
+    {
+      clientID: process.env.ig_app_id,
+      clientSecret: process.env.ig_app_secret,
+      callbackURL: '/auth/instagram/callback'
+    },
+    (accessToken, refreshToken, profile, done) => {
+      UserModel.findOne(
+        {}
+      )
+    }
+  )
+)
