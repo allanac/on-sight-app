@@ -11,6 +11,7 @@ const userSchema = new Schema(
       type: String,
       required:[true, 'Password is required']
     },
+    instagramID: {type: String},
     scans: [
       {
         type: Schema.Types.ObjectId,

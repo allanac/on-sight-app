@@ -34,18 +34,18 @@ passport.use(
         {username: sentUsername},
         (err, userFromDb) => {
           if(err){
-            done(err)
-            return
+            done(err);
+            return;
           }
           if(!userFromDb){
             done(null, false, {message:'Thats not the right username'})
-            return
+            return;
           }
           const isPasswordGood = bcrypt.compareSync(sentPassword, userFromDb.encryptedPassword)
 
           if(!isPasswordGood){
             done(null, false, {message:'thats not the right password'})
-            return
+            return;
           }
           done(null, userFromDb)
         }
@@ -66,8 +66,31 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
       UserModel.findOne(
-        {}
-      )
+        {instagramID: profile.id},
+
+        (err, userFromDb) => {
+          if(err){
+            done(err);
+            return;
+          }
+
+          if (userFromDb) {
+            done(null, userFromDb);
+            return;
+          }
+
+          const theUser = new UserModel({
+            instagramID: profile.id
+          });
+          theUser.save((err) => {
+            if(err) {
+              done(err);
+              return;
+            }
+            done(null, theUser);
+          })
+        }
+      );
     }
   )
-)
+);
