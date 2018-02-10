@@ -96,3 +96,26 @@ passport.use(
 );
 
 // start FB Stratagy
+
+const FbStrategy = require('passport-facebook').Strategy;
+
+passport.use(new FbStrategy(
+  {
+  clientID: process.env.fb_app_id,
+  clientSecret: process.env.fb_app_secret,
+  callbackURL: '/auth/facebook/callback'
+  },
+  (accessToken, refreshToken, profile, done) => {
+    UserModel.findOne(
+      {facebookID: profile.id},
+
+      (err, userFromDb) => {
+        if(err){
+          done(err);
+          return;
+        }
+      }
+    )
+  }
+
+))
