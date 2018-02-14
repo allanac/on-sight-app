@@ -114,8 +114,20 @@ passport.use(new FbStrategy(
           done(err);
           return;
         }
+
+        const theUser = new UserModel ({
+          facebookID: profile.id,
+          email: profile.displayName
+        })
+        theUser.save((err) => {
+          if(err) {
+            done(err);
+            return;
+          }
+          done(null, theUser);
+        })
       }
     )
   }
-
-))
+)
+)
