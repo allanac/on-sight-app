@@ -117,7 +117,7 @@ passport.use(new FbStrategy(
 
         const theUser = new UserModel ({
           facebookID: profile.id,
-          email: profile.displayName
+          username: profile.displayName
         })
         theUser.save((err) => {
           if(err) {

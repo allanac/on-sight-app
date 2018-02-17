@@ -12,13 +12,7 @@ const userSchema = new Schema(
       required:[true, 'Password is required']
     },
     instagramID: {type: String},
-    facebookID:{type:String}
-    scans: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Media', required: false
-      }]
-  },
+    facebookID:  {type: String},
   {
     timestamps:
     { createdAt:'created_at',
