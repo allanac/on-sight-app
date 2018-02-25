@@ -1,12 +1,13 @@
 <div class="form-wrapper">
 
+<h2> Login </h2>
 <div class="row">
-
+    <p class="error" *ngIf="errorMessage"> {{ errorMessage }}
     <form (ngSubmit)="loginSubmit()" class="col s12">
 
       <div class="row">
         <div class="input-field col s12">
-          <input id="username" type="text" class="validate">
+          <input id="username" type="text" class="validate" name="username" [(ngModel)]="">
           <label for="username" data-error="wrong" data-success="right">Username</label>
         </div>
       </div>
