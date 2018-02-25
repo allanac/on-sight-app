@@ -12,12 +12,10 @@ const userSchema = new Schema(
       required:[true, 'Password is required']
     },
     instagramID: {type: String},
-    facebookID:  {type: String},
-  {
-    timestamps:
-    { createdAt:'created_at',
-      updatedAt:'updated_at'}
-    }
+    facebookID:  {type: String}
+  },
+    {timestamps: true }
+  
 )
 
 const UserModel = mongoose.model('User', userSchema)
