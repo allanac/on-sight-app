@@ -80,7 +80,7 @@ passport.use(
           }
 
           const theUser = new UserModel({
-            instagramID: profile.id
+            instagramID: profile.username
           });
           theUser.save((err) => {
             if(err) {
