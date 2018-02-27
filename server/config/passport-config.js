@@ -55,45 +55,45 @@ passport.use(
 )
 
 // IG user login
-// const IgStrategy = require('passport-instagram').Strategy;
-//
-// passport.use(
-//   new IgStrategy(
-//     {
-//       clientID: process.env.ig_app_id,
-//       clientSecret: process.env.ig_app_secret,
-//       callbackURL: '/auth/instagram/callback'
-//     },
-//     (accessToken, refreshToken, profile, done) => {
-//       UserModel.findOne(
-//         {instagramID: profile.id},
-//
-//         (err, userFromDb) => {
-//           if(err){
-//             done(err);
-//             return;
-//           }
-//
-//           if (userFromDb) {
-//             done(null, userFromDb);
-//             return;
-//           }
-//
-//           const theUser = new UserModel({
-//             instagramID: profile.username
-//           });
-//           theUser.save((err) => {
-//             if(err) {
-//               done(err);
-//               return;
-//             }
-//             done(null, theUser);
-//           })
-//         }
-//       );
-//     }
-//   )
-// );
+const IgStrategy = require('passport-instagram').Strategy;
+
+passport.use(
+  new IgStrategy(
+    {
+      clientID: process.env.ig_app_id,
+      clientSecret: process.env.ig_app_secret,
+      callbackURL: '"http://localhost:3000/auth/instagram/callback"'
+    },
+    (accessToken, refreshToken, profile, done) => {
+      UserModel.findOne(
+        {instagramID: profile.id},
+
+        (err, userFromDb) => {
+          if(err){
+            done(err);
+            return;
+          }
+
+          if (userFromDb) {
+            done(null, userFromDb);
+            return;
+          }
+
+          const theUser = new UserModel({
+            instagramID: profile.username
+          });
+          theUser.save((err) => {
+            if(err) {
+              done(err);
+              return;
+            }
+            done(null, theUser);
+          })
+        }
+      );
+    }
+  )
+);
 
 // start FB Stratagy
 

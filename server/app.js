@@ -45,6 +45,7 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
+app.get('/auth/instagram', passport.authenticate('instagram'))
 
 // ROUTES BEGIN -------- //
 const index = require('./routes/index');
@@ -76,6 +77,6 @@ app.use((err, req, res, next) => {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-}); 
+});
 
 module.exports = app;
