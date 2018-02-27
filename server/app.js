@@ -45,7 +45,12 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
-app.get('/auth/instagram', passport.authenticate('instagram'))
+app.get('/auth/instagram', passport.authenticate('instagram'),
+  (req, res, next) => {});
+app.get('/auth/instagram/callback',
+    passport.authenticate('instagram', {failureRedirect: '/login'}),
+  (req, res, next) => {res.redirect('');
+});
 
 // ROUTES BEGIN -------- //
 const index = require('./routes/index');
